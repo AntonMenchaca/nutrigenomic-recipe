@@ -54,16 +54,11 @@ export default function RootLayout({ children }) {
                 <div style={{ fontSize: 20, marginLeft: 20 }}><strong>Nutrigenomic Recipes</strong></div>
 
               </div>
-              <div style={{ display: 'flex', width: '30%', justifyContent: 'space-between', marginRight: 20, alignItems: 'center' }}>
-                <Button type='primary'>
-                  Resources
-                </Button>
+              {/* <div style={{ display: 'flex', justifyContent: 'space-between', marginRight: 20, alignItems: 'center' }}>
                 <Button type='primary'>
                   Random Recipe
                 </Button>
-                <Switch onClick={toggleTheme} />
-
-              </div>
+              </div> */}
             </header>
             {children}
           </>

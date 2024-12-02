@@ -1,10 +1,12 @@
-import React from 'react';
+"use client";
+import React, { useState } from 'react';
 import { Button, message, Steps, theme } from 'antd';
 
 
 const RecipeSteps = ({ steps }) => {
   const { token } = theme.useToken();
   const [current, setCurrent] = useState(0);
+  const [nextDisabled, setNextDisabled] = useState(false)
   const next = () => {
     setCurrent(current + 1);
   };
@@ -14,47 +16,55 @@ const RecipeSteps = ({ steps }) => {
   const items = steps.map((item) => ({
     key: item.title,
     title: item.title,
+    content: item?.content,
+
   }));
-  const contentStyle = {
-    lineHeight: '260px',
-    textAlign: 'center',
-    color: token.colorTextTertiary,
-    backgroundColor: token.colorFillAlter,
-    borderRadius: token.borderRadiusLG,
-    border: `1px dashed ${token.colorBorder}`,
-    marginTop: 16,
-  };
+
   return (
-    <>
-      <Steps current={current} items={items} />
-      <div style={contentStyle}>{steps[current].content}</div>
+    <div style={{ width: '85vw', margin: '8px auto' }}>
+      <Steps className='step-color' current={current} items={items} />
       <div
         style={{
-          marginTop: 24,
+          display: 'flex',
+          flexDirection: 'row',
+          justifyContent: 'space-around',
+          margin: '15px auto',
+
         }}
       >
-        {current < steps.length - 1 && (
-          <Button type="primary" onClick={() => next()}>
-            Next
-          </Button>
-        )}
-        {current === steps.length - 1 && (
-          <Button type="primary" onClick={() => message.success('Processing complete!')}>
-            Done
-          </Button>
-        )}
+
+
+      </div>
+      <div style={{ margin: '15px auto', }}>{steps[current]?.content}</div>
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'row',
+          justifyContent: 'space-around',
+          margin: '0 auto',
+
+        }}
+      >
         {current > 0 && (
           <Button
             style={{
               margin: '0 8px',
+
             }}
             onClick={() => prev()}
           >
             Previous
           </Button>
         )}
+        {current < steps.length - 1 && (
+          <Button type="primary" disabled={nextDisabled} onClick={() => next()}>
+            Next
+          </Button>
+        )}
+
+
       </div>
-    </>
+    </div>
   );
 };
 

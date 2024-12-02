@@ -16,6 +16,9 @@
 .ant-switch-checked {
     background-color: #8a8a8a !important; /* Background color when switched on */
 }
+.step-color {
+    color: var(--text-color);
+}
 
 body,
 html {
